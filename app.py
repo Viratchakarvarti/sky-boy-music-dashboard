@@ -1,56 +1,39 @@
 import streamlit as st
-import random
-import time
 
-# --- App Settings ---
-st.set_page_config(page_title="Sky Boy Dashboard", layout="wide")
-st.title("🚀 Sky Boy Music Dashboard")
+st.set_page_config(page_title="Sky Boy Pro Dashboard", layout="wide")
+st.title("🚀 Sky Boy Pro Music Dashboard")
 
-# --- Logic Functions ---
-def get_trends():
-    return ["#LofiMusic", "#Shayari", "#DesiRap", "#NewTrack", "#SkyBoy", "#SadVibes", 
-            "#Trending2026", "#MusicProducer", "#ViralReels", "#Heartbreak", 
-            "#TrendingAudio", "#EmotionalRap", "#ArtistLife", "#SpotifyIndia", "#Lyrics"]
+# --- Tabs for Clean Layout ---
+tab1, tab2, tab3 = st.tabs(["📊 Analytics & Trends", "✍️ Viral Engine", "💬 Engagement"])
 
-def generate_viral_package(title, theme, lyrics):
-    desc = f"""🎵 Title: {title}
-✨ Theme: {theme}
-
-{lyrics}
-
---------------------------------------------------
-Subscribe for more Lofi & Desi Rap!
-#SkyBoy #Music #NewSong2026 #Trending #ViralMusic
-
-Follow on: @nmxmusicyt | @feelthelinesyt
-"""
-    keywords = "Sky Boy music, viral song, lofi ghazal, desi rap, emotional shayari, trending 2026, music producer"
-    return desc, keywords
-
-# --- Dashboard Layout ---
-menu = ["Trend Tracker", "Content Engine", "Engagement"]
-choice = st.sidebar.selectbox("Menu", menu)
-
-if choice == "Trend Tracker":
-    st.subheader("🔥 Auto-Trend & Audience Alert")
-    st.write(f"**Top 15 Tags:** {', '.join(get_trends())}")
-    st.info(f"**Best Time to Post:** 8:30 PM - 10:00 PM")
+with tab1:
+    st.subheader("🔥 Live Trends & Audience Insights")
+    # Alag Box: Time
+    st.info("🕒 Best Time to Post: 8:30 PM - 10:00 PM")
+    # Alag Box: Trending Hashtags
+    st.write("### 📌 Top Trending Hashtags")
+    tags = "#LofiMusic #Shayari #DesiRap #NewTrack #SkyBoy #SadVibes #Trending2026"
+    st.code(tags, language="text")
     if st.button("Refresh Trends"):
         st.rerun()
 
-elif choice == "Content Engine":
+with tab2:
     st.subheader("✍️ Viral Content Engine")
     title = st.text_input("Song Title:")
     theme = st.text_input("Song Theme:")
-    snippet = st.text_area("Snippet:")
-    if st.button("Generate Package"):
-        d, k = generate_viral_package(title, theme, snippet)
-        st.subheader("📝 Viral Description:")
-        st.text_area("Copy this:", value=d, height=200)
-        st.subheader("🔑 SEO Tags:")
-        st.text_area("Copy this:", value=k)
+    
+    if st.button("Generate Strategy"):
+        # Alag Box: Title
+        st.success(f"Suggested Viral Title: {title} - Lofi Version (Must Listen!)")
+        
+        # Alag Box: Description
+        st.write("### 📝 Optimized Description")
+        st.text_area("Copy this:", f"Experience the magic of {title}. {theme} vibes. \n\nLike, Share & Subscribe!", height=150)
+        
+        # Alag Box: SEO Keywords
+        st.write("### 🔑 SEO Keywords")
+        st.text_area("Copy for Tags:", "Lofi, Sad, {title}, Sky Boy, Music, Trending", height=70)
 
-elif choice == "Engagement":
+with tab3:
     st.subheader("💬 Engagement Manager")
-    st.write("Checking for new comments...")
-    st.warning("No new comments to process.")
+    st.warning("No new comments detected.")
